@@ -1,0 +1,72 @@
+Task
+**4 - Dictionary for storing data and make efficient calculations**
+This is an expansion of the exercise nr. 3 of the list exercises. Same situation, we want to
+use this cool 'input'-function:
+```python
+user_name = input("Enter your name: ")
+greeting = "Hello, " + user_name + "!"
+print(greeting)
+```
+
+- Write a program that asks the user 3 questions:
+    - their name,
+    - the date of today
+    - their daily hours of work of this day,
+    - their money spent on lunch at this day.
+
+- This time think about a dictionary structure to store all values that are entered. What makes sense to store as key and what as values? 
+*hint:* name should be definetly a key.
+- Then, write a for-loop that loops through all keys and calculates the sum of all daily hours worked so far and the average lunch expenses.
+- Print out the result to us in a nicely formatted way. 
+(If you want to be really pythonic, try to use string formatting with the format-method and f-strings.)
+
+Optional task:
+- add a feature that let's the user tell you to delete a certain element if it was wrong.
+
+#here are my codes:
+
+# 1. definition
+database = {}
+user_name = []
+date_today = []
+y = 0
+
+# 2. log_In
+user_name_input = input("Enter your name: ")
+date_today_input = input("Date of today: ")
+daily_hours_input = float(input("hours worked today: "))
+lunch_expenses_input = float(input ("lunch_expenses: "))
+greeting = "Hello, " + user_name_input + "!"
+print(greeting)
+#
+# 3. Database
+if not user_name_input in user_name:
+    user_name.append(user_name_input)
+if not date_today_input in date_today:
+    date_today.append(date_today_input)
+log_in_input = user_name_input + " " + date_today_input
+database [log_in_input] = {"n":user_name_input,"d":date_today_input,
+                           "h":daily_hours_input,"m":lunch_expenses_input}
+
+# 4. Display
+# Then, write a for-loop that loops through all keys and
+# calculates the sum of all daily hours worked so far and the average lunch expenses.
+for x in user_name:
+    print (x)
+    sum_h = 0
+    sum_m = 0
+    count_of_date = 0
+    for y in date_today:
+        if x + " " + y in database :
+           sum_h += database[x + " " + y]["h"]
+           sum_m += database[x + " " + y]["m"]
+           count_of_date += 1 
+           print(database[x + " " + y]["d"],":",database[x + " " + y]["h"],"hours",database[x + " " + y]["m"],"€")
+        else:
+            pass
+    print(f'You worked {sum_h} hours in {count_of_date} days and spent {sum_m/count_of_date}€ per day in average.')
+
+# 5. delete wrong items
+wrong_input = input("Enter your name: ") + " "+ input("On which date was wrong: ")
+database.pop(wrong_input)
+print(database)
